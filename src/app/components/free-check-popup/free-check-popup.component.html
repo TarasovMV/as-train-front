@@ -1,0 +1,12 @@
+<h4>Заполните поля для создания тестирования</h4>
+
+<mat-form-field style="width: 100%">
+    <mat-label>Оценка</mat-label>
+    <input autocomplete="off" required [formControl]="score" matInput placeholder="Введите результат">
+    <mat-error *ngIf="score.invalid">Пожалуйста, введите количество баллов</mat-error>
+</mat-form-field>
+
+<div mat-dialog-actions>
+    <button (click)="onCancelClick()" mat-button>Отмена</button>
+    <button mat-button cdkFocusInitial (click)="onCreateClick()">Ок</button>
+</div>

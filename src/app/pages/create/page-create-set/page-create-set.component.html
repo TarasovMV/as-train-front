@@ -1,0 +1,12 @@
+<div style="margin-top: 10px;">
+    <button mat-button (click)="setCreate()">
+        <mat-icon aria-hidden="false">add</mat-icon>
+        <span> Добавить сет</span>
+    </button>
+</div>
+<mat-spinner style="margin: auto" *ngIf="!setsList"></mat-spinner>
+<div *ngIf="setsList" class="test-list">
+    <ng-container *ngFor="let set of setsList">
+        <app-set-card [data]="set" (delete)="setDelete(set.id)" (edit)="setEdit(set)" class="test-card"></app-set-card>
+    </ng-container>
+</div>

@@ -1,0 +1,22 @@
+<h4>Заполните поля для создания тестирования</h4>
+
+<mat-form-field style="width: 100%">
+    <mat-label>Название тестирования</mat-label>
+    <input autocomplete="off" required [formControl]="title" matInput placeholder="Тестирования по пожарной безопасности">
+    <mat-error *ngIf="title.invalid">Пожалуйста, введите название тестирования</mat-error>
+</mat-form-field>
+
+<mat-form-field style="width: 100%">
+    <mat-label>Тип тестирования</mat-label>
+    <mat-select required [formControl]="type">
+      <mat-option *ngFor="let type of testingTypes" [value]="type.value">
+        {{type.viewValue}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="title.invalid">Пожалуйста, выберите тип тестирования</mat-error>
+</mat-form-field>
+
+<div mat-dialog-actions>
+    <button (click)="onCancelClick()" mat-button>Отмена</button>
+    <button mat-button cdkFocusInitial (click)="onCreateClick()">Создать</button>
+</div>

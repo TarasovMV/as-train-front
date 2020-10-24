@@ -1,0 +1,21 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>{{ data.title }}</mat-card-title>
+        <mat-card-subtitle>Дата последнего изменения: 01.01.2020</mat-card-subtitle>
+    </mat-card-header>
+    <!-- <div mat-card-image src="assets/images/category/default.svg" alt="data.title"></div> -->
+    <div class="category-card-image"></div>
+    <mat-card-content>
+        <p>{{ data.set?.title ? data.set?.title : 'Выберите сет' }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button (click)="onEdit()">
+            <mat-icon aria-hidden="false">edit</mat-icon>
+            <span> Редактировать</span>
+        </button>
+        <button mat-button (click)="onDelete()">
+            <mat-icon aria-hidden="false">delete</mat-icon>
+            <span> Удалить</span>
+        </button>
+    </mat-card-actions>
+</mat-card>

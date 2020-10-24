@@ -1,0 +1,27 @@
+.container {
+    margin: 10px 0;
+
+    ::ng-deep .mat-expansion-panel-spacing {
+        // background-color: transparent !important;
+    }
+
+    .mat-expansion-panel-header-title,
+    .mat-expansion-panel-header-description {
+        flex-basis: 0;
+    }
+
+    .mat-expansion-panel-header-description {
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.result-card {
+    display: flex;
+    flex-flow: column;
+    gap: 15px;
+
+    & > * {
+        margin: auto;
+    }
+}

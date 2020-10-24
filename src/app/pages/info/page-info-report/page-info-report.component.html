@@ -1,0 +1,97 @@
+<ng-container *ngIf="currentResult; else main">
+    <app-page-info-result [id]="this.currentResult" (closeEvent)="closeResult()"></app-page-info-result>
+</ng-container>
+
+<ng-template #main>
+    <app-loader *ngIf="loader$ | async"></app-loader>
+
+    <div style="margin-top: 10px;">
+        <button (click)="refreshTable()" mat-button>
+            <mat-icon matPrefix style="margin-right: 10px">refresh</mat-icon>
+            <span>Обновить список результатов</span>
+        </button>
+        <button (click)="getReport()" mat-button>
+            <mat-icon aria-hidden="false" style="margin-right: 10px">cloud_download</mat-icon>
+            <span> Скачать общий отчет </span>
+        </button>
+    </div>
+
+    <mat-form-field style="margin-top: 15px">
+        <mat-label>Фильтр по категории</mat-label>
+        <mat-select [(ngModel)]="currentFilterId">
+          <mat-option *ngFor="let filter of filterCategories" [value]="filter.id">
+            {{filter.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    <table mat-table matSort (matSortChange)="sortData($event)" [dataSource]="filterDataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="id">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> № </th>
+        <td mat-cell *matCellDef="let element"> {{getNumber(element)}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Фамилия </th>
+        <td mat-cell *matCellDef="let element"> {{element.user.lastName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef> Имя </th>
+        <td mat-cell *matCellDef="let element"> {{element.user.firstName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="middleName">
+        <th mat-header-cell *matHeaderCellDef> Отчество </th>
+        <td mat-cell *matCellDef="let element"> {{element.user.middleName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="stage1">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> 1 этап </th>
+            <td mat-cell *matCellDef="let element"> {{getStageScore(element.id, 0)}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="stage2">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> 2 этап </th>
+            <td mat-cell *matCellDef="let element"> {{getStageScore(element.id, 1)}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="stage3">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> 3 этап </th>
+            <td mat-cell *matCellDef="let element"> {{getStageScore(element.id, 2)}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="stage4">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> 4 этап </th>
+            <td mat-cell *matCellDef="let element"> {{getStageScore(element.id, 3)}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="scoreResult">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> Итого </th>
+            <td mat-cell *matCellDef="let element"> {{getStageScore(element.id)}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="timeResult">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> Время, c </th>
+            <td mat-cell *matCellDef="let element"> {{getResultTime(element.id)}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="report">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+                <mat-icon (click)="reportResult($event, element)" matTooltip="Скачать персональный отчет">description</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+                <mat-icon (click)="deleteResult($event, element)" matTooltip="Удалить результат">delete_sweep</mat-icon>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let element; columns: displayedColumns;" (click)="showResultById(element.id)"></tr>
+    </table>
+</ng-template>

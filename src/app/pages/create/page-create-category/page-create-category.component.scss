@@ -1,0 +1,15 @@
+.category-list {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+.category-card {
+    padding: 10px;
+    box-sizing: border-box;
+    min-width: 350px;
+    max-width: 25%;
+    width: 25%;
+}

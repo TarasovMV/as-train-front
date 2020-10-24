@@ -1,0 +1,12 @@
+.category-card-image {
+    height: 300px;
+    width: 300px;
+    margin: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    mask-image: url(../../../assets/images/category/default.svg);
+    mask-repeat: no-repeat;
+    mask-size: cover;
+    background-color: var(--color-category-card-img);
+}

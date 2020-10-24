@@ -1,0 +1,21 @@
+<ng-container *ngIf="!(quizService.isQuizPageActive$ | async)">
+    <app-loader *ngIf="loader$ | async"></app-loader>
+    <mat-spinner style="margin: auto;" *ngIf="!listQuiz"></mat-spinner>
+    <ng-container *ngIf="listQuiz">
+        <div style="margin-top: 10px;">
+            <button (click)="openDialogTest()" mat-button>
+                <mat-icon aria-hidden="false">add</mat-icon>
+                <span> Добавить тестирование</span>
+            </button>
+        </div>
+        <div class="test-list">
+            <ng-container *ngFor="let quiz of listQuiz">
+                <app-test-card [data]="quiz" (delete)="openDialogDelete(quiz.id)" (edit)="testEdit(quiz.id)" class="test-card"></app-test-card>
+            </ng-container>
+        </div>
+    </ng-container>
+</ng-container>
+
+<ng-container *ngIf="quizService.isQuizPageActive$ | async">
+    <app-page-create-test-quiz [activeTesting]="activeQuiz"></app-page-create-test-quiz>
+</ng-container>

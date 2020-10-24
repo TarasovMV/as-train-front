@@ -1,0 +1,98 @@
+// @use "../../../styles.scss" as mat;
+
+.card {
+    transition: 0.3s ease-in-out;
+    // border-left: solid 7px mat.$primary;
+    border-left: solid 7px var(--color-primary);
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+
+    &_button {
+        display: block;
+        opacity: 0;
+        height: 0;
+        &__active {
+            height: auto;
+            opacity: 1;
+            transition: all .3s ease-in-out;
+        }
+    }
+
+    ::ng-deep .mat-form-field-underline {
+        opacity: 1;
+        transition: all .3s ease-in-out;
+    }
+
+    ::ng-deep .mat-form-field-label-wrapper {
+        opacity: 1;
+        transition: all .3s ease-in-out;
+    }
+
+    ::ng-deep .mat-radio-label-content {
+        width: 100% !important;
+    }
+
+    ::ng-deep .mat-checkbox-label {
+        width: 100%;
+    }
+
+    ::ng-deep .mat-checkbox-layout {
+        width: 30px;
+    }
+
+    ::ng-deep .mat-card-header .mat-card-title {
+        margin: 0;
+    }
+
+    ::ng-deep .mat-card-header-text {
+        margin: auto 16px;
+    }
+
+    &_not-active {
+
+        border-left: solid 6px transparent;
+
+        ::ng-deep .mat-form-field-underline {
+            opacity: 0;
+            transition: all .3s ease-in-out;
+        }
+    
+        ::ng-deep .mat-radio-container {
+            top: -1px;
+        }
+    
+        ::ng-deep .mat-checkbox-inner-container {
+            top: -1px;
+        }
+
+        ::ng-deep .mat-form-field-label-wrapper {
+            opacity: 0;
+            transition: all .3s ease-in-out;
+        }
+
+        transition: .3s ease-in-out;
+    }
+}
+
+.content-blocker {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+    background: transparent;
+    cursor: pointer;
+}
+
+.delete-wrapper {
+    position: absolute;
+    left: -80px;
+    top: 0;
+}
+
+.fill-remaining-space {
+    flex: 1 1 auto;
+}

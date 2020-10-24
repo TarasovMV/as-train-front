@@ -1,0 +1,33 @@
+<h4>Заполните поля для {{ data.category?.id ? 'редактирования' : 'создания'}} категории {{ data.category?.title ? data.category?.title : 'пользователей'}}</h4>
+
+<mat-form-field appearance="standard" style="width: 100%">
+    <mat-label>Название категории</mat-label>
+    <input autocomplete="off" required [formControl]="titleForm" matInput placeholder="Оператор АСУ ТП">
+    <mat-error *ngIf="titleForm.invalid">Пожалуйста, введите название категории</mat-error>
+</mat-form-field>
+
+<mat-form-field style="width: 100%; margin-top: 5px;">
+    <mat-label>Выберите сет</mat-label>
+    <mat-select required [formControl]="setForm">
+      <mat-option *ngFor="let set of sets" [value]="set.id">
+        {{set.title}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="setForm.invalid">Пожалуйста, выберите сет</mat-error>
+</mat-form-field>
+
+<ng-container *ngIf="data.category.id">
+  <input #file type="file" [hidden]="true" accept="image/*" (change)="handleFileInput(file.files)">
+  <button mat-icon-button #upload (click)="file.click()">
+    <mat-label style="margin-right: 10px;">Загрузите картинку</mat-label>
+    <mat-icon>publish</mat-icon>
+  </button>
+  <span style="margin-top: 15px; float: right; font-weight: 200; font-size: 14px;">
+    {{data.category.file?.name ? data.category.file?.name : 'Не выбрано'}}
+  </span>
+</ng-container>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancelClick()">Отмена</button>
+    <button mat-button cdkFocusInitial (click)="onAcceptClick()">Сохранить</button>
+</div>

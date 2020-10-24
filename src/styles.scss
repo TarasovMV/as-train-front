@@ -1,0 +1,105 @@
+@import "theme/dark-variables.scss";
+@import "theme/light-variables.scss";
+
+@import '~@angular/material/theming';
+@include mat-core();
+
+$gpn-primary: (
+    50 : #e2eff7,
+    100 : #b6d7ec,
+    200 : #85bddf,
+    300 : #54a2d2,
+    400 : #308ec9,
+    500 : #0b7abf,
+    600 : #0a72b9,
+    700 : #0867b1,
+    800 : #065da9,
+    900 : #034a9b,
+    A100 : #c6ddff,
+    A200 : #93bfff,
+    A400 : #60a1ff,
+    A700 : #4791ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$slavneft-primary: (
+    50 : #e0f0f9,
+    100 : #b3daef,
+    200 : #80c2e5,
+    300 : #4daada,
+    400 : #2697d2,
+    500 : #0085ca,
+    600 : #007dc5,
+    700 : #0072bd,
+    800 : #0068b7,
+    900 : #0055ab,
+    A100 : #d4e7ff,
+    A200 : #a1caff,
+    A400 : #6eadff,
+    A700 : #559eff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$testing-admin-primary: mat-palette($slavneft-primary);
+// $testing-admin-primary: mat-palette($slavneft-primary);
+
+$testing-admin-accent: mat-palette($slavneft-primary);
+// $testing-admin-accent: mat-palette($slavneft-primary);
+// $testing-admin-accent: mat-palette($mat-pink, A200, A100, A400);
+
+
+$testing-admin-warn: mat-palette($mat-red);
+$testing-admin-theme-light: mat-light-theme($testing-admin-primary, $testing-admin-accent, $testing-admin-warn);
+$testing-admin-theme-dark: mat-dark-theme($testing-admin-primary, $testing-admin-accent, $testing-admin-warn);
+
+$primary: mat-color($testing-admin-primary);
+
+$roboto-font-path: "~roboto-fontface/fonts" !default;
+$material-icons-font-path: '~material-icons/iconfont/';
+@import "~roboto-fontface/css/roboto/sass/roboto-fontface";
+@import '~material-icons/iconfont/material-icons.scss';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; font-display: auto; }
+
+:root {
+    --color-primary: #{$primary};
+    .theme-light {
+        @include variables-light();
+        @include angular-material-theme($testing-admin-theme-light);
+    }
+    .theme-dark {
+        @include variables-dark();
+        @include angular-material-theme($testing-admin-theme-dark);
+    }
+}

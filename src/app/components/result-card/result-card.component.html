@@ -1,0 +1,44 @@
+<ng-container *ngIf="dataSource">
+  <mat-card (click)="getUserAnswerId()" class="card" [class]="getCardClassByQuestion()">
+    <mat-card-header>
+      <mat-card-title>Вопрос #{{idx}} ({{score | number:'0.0-2'}})</mat-card-title>
+      <span class="fill-remaining-space"></span>
+      <mat-button-toggle-group *ngIf="dataSource.type === 3" [(ngModel)]="questionType" (change)="setQuestionResultType($event.value)">
+          <mat-button-toggle value="unknown">Не проверено</mat-button-toggle>
+          <mat-button-toggle value="false">Неверно</mat-button-toggle>
+          <mat-button-toggle value="true">Верно</mat-button-toggle>
+      </mat-button-toggle-group>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <p>
+        {{dataSource.title}}
+      </p>
+      <p *ngIf="quizType === 2 || quizType === 3">
+        {{quizType === 2 ? panoTitle : vrTitle}}
+      </p>
+      <section>
+        <div class="content-disabler"></div>
+        <ul>
+          <ng-container [ngSwitch]="dataSource.type">
+            <ng-template ngSwitchCase="1">
+              <mat-radio-group [ngModel]="getUserAnswerId()">
+                <ng-container *ngFor="let answer of dataSource.answers">
+                  <li [class.active-answer]="isUserAnswer(answer.id)"><mat-radio-button [value]="answer.id">{{answer.title}}</mat-radio-button></li>
+                </ng-container>
+              </mat-radio-group>
+            </ng-template>
+            <ng-template ngSwitchCase="2">
+              <ng-container *ngFor="let answer of dataSource.answers">
+                <li [class.active-answer]="isUserAnswer(answer.id)"><mat-checkbox [checked]="answer.isValid">{{answer.title}}</mat-checkbox></li>
+              </ng-container>
+            </ng-template>
+            <ng-template ngSwitchCase="3">
+              <span>{{dataSource.result.freeResult}}</span>
+            </ng-template>
+          </ng-container>
+        </ul>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

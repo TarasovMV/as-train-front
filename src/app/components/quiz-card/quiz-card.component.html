@@ -1,0 +1,95 @@
+<mat-card class="card" [class.card_not-active]="!isActive">
+    <div class="delete-wrapper card_button" [class.card_button__active]="isActive">
+        <button (click)="buttonDeleteCard()" *ngIf="isActive" matTooltip="Удалить вопрос" matTooltipPosition="before" matSuffix mat-fab color="accent" mat-button>
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+    <div *ngIf="!isActive" class="content-blocker"></div>
+    <mat-card-header>
+        <mat-card-title>Вопрос #{{idx}}</mat-card-title>
+        <span class="fill-remaining-space"></span>
+        <mat-button-toggle-group *ngIf="isActive && quizType !== 3" [value]="data.type.toString()" (change)="toggleType($event)">
+            <mat-button-toggle value="1">Одиночный</mat-button-toggle>
+            <mat-button-toggle value="2">Множественный</mat-button-toggle>
+            <mat-button-toggle value="3">Свободный</mat-button-toggle>
+        </mat-button-toggle-group>
+    </mat-card-header>
+    <mat-divider *ngIf="isActive"></mat-divider>
+    <mat-card-content style="margin-top: 10px; padding: 0 20px">
+        <mat-form-field style="width: 100%;">
+            <mat-label>Вопрос</mat-label>
+            <textarea
+                [value]="data.title"
+                (input)="data.title = $event.target.value"
+                (blur)="blurQuestionTitle(data.title)"
+                cdkTextareaAutosize matInput placeholder="Введите текст вопроса">
+            </textarea>
+            <mat-icon matSuffix *ngIf="isActive">edit</mat-icon>
+        </mat-form-field>
+        <mat-form-field *ngIf="quizType === 2" style="width: 100%; margin-top: 5px;">
+            <mat-label>Выберите панораму:</mat-label>
+            <mat-select [(ngModel)]="data.pano" (selectionChange)="changePano()" required>
+              <mat-option *ngFor="let pano of panoramas" [value]="pano.id">
+                {{pano.title}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="quizType === 3" style="width: 100%; margin-top: 5px;">
+            <mat-label>Выберите сцену VR:</mat-label>
+            <mat-select [(ngModel)]="data.vrExperience" (selectionChange)="changeVr()" required>
+                <mat-option *ngFor="let scene of vrScenes" [value]="scene.id">
+                    {{scene.title}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <ng-container *ngIf="data.type !== 3">
+            <ng-container *ngIf="this.data.type === 1; else multiplyAnswer">
+                <mat-radio-group aria-label="Select an option">
+                    <ng-container *ngFor="let answer of data.answers">
+                        <mat-radio-button (change)="buttonCheckAnswer(answer)" [checked]="answer.isValid" [value]="answer.id" color="accent" style="width: 30px;">
+                        </mat-radio-button>
+                        <mat-form-field style="width: calc(100% - 30px); z-index: 9;">
+                            <mat-label>Вариант ответа</mat-label>
+                            <textarea
+                                [value]="answer.title"
+                                (input)="answer.title = $event.target.value"
+                                (blur)="blurAnswerTitle(answer.title, answer.id)"
+                                cdkTextareaAutosize matInput placeholder="Введите текст варианта ответа">
+                            </textarea>
+                            <button (click)="buttonDeleteAnswer(answer.id)" *ngIf="isActive" matTooltip="Удалить вариант ответа" matTooltipPosition="after" matSuffix color="accent" mat-button>
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </ng-container>
+                </mat-radio-group>
+            </ng-container>
+
+            <ng-template #multiplyAnswer>
+                <ng-container *ngFor="let answer of data.answers">
+                    <mat-checkbox (change)="buttonCheckAnswer(answer)" [(ngModel)]="answer.isValid" color="accent" style="width: 30px;">
+                    </mat-checkbox>
+                    <mat-form-field style="width: calc(100% - 30px); z-index: 9;">
+                        <mat-label>Вариант ответа</mat-label>
+                        <textarea
+                            [value]="answer.title"
+                            (input)="answer.title = $event.target.value"
+                            (blur)="blurAnswerTitle(answer.title, answer.id)"
+                            cdkTextareaAutosize matInput placeholder="Введите текст варианта ответа">
+                        </textarea>
+                        <button (click)="buttonDeleteAnswer(answer.id)" *ngIf="isActive" matTooltip="Удалить вариант ответа" matTooltipPosition="after" matSuffix color="accent" mat-button>
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </ng-container>
+            </ng-template>
+
+            <button *ngIf="quizType !== 3" (click)="buttonAddAnswer()"  class="card_button" [class.card_button__active]="isActive" color="accent" mat-button>
+                <mat-icon>add</mat-icon>
+                <span> Добавить вариант ответа</span>
+            </button>
+        </ng-container>
+        <ng-container *ngIf="data.type === 3">
+            <mat-label>Вопрос со свободным вариантом ответа</mat-label>
+        </ng-container>
+    </mat-card-content>
+</mat-card>

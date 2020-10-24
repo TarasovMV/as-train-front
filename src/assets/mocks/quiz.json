@@ -1,0 +1,62 @@
+{
+    "id": 1,
+    "title": "Тестирование по общим знаниям",
+    "type": 1,
+    "isShuffleQuestions": true,
+    "questions": [
+        {
+            "id": 1,
+            "questionTitle": "Сколько планет в солнечной системе?",
+            "isMultiply": false,
+            "answers": [
+                {
+                    "id": 1,
+                    "answerTitle": "Одна планета",
+                    "isActive": false
+                }, 
+                {
+                    "id": 2,
+                    "answerTitle": "Две планеты",
+                    "isActive": false
+                },
+                {
+                    "id": 3,
+                    "answerTitle": "Много планет",
+                    "isActive": true
+                }, 
+                {
+                    "id": 4,
+                    "answerTitle": "Не знаю",
+                    "isActive": false
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "questionTitle": "Что можно отнести к животным?",
+            "isMultiply": true,
+            "answers": [
+                {
+                    "id": 5,
+                    "answerTitle": "Лев",
+                    "isActive": true
+                }, 
+                {
+                    "id": 6,
+                    "answerTitle": "Тигр",
+                    "isActive": true
+                },
+                {
+                    "id": 7,
+                    "answerTitle": "Обезьяна",
+                    "isActive": true
+                }, 
+                {
+                    "id": 8,
+                    "answerTitle": "Планета солнечной системы",
+                    "isActive": false
+                }
+            ]
+        }
+    ]
+}

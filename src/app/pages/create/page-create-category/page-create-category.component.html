@@ -1,0 +1,18 @@
+<div style="margin: 10px;">
+    <button mat-button (click)="categoryCreate()">
+        <mat-icon aria-hidden="false">add</mat-icon>
+        <span> Добавить категорию</span>
+    </button>
+    <button mat-button (click)="getLocalFile()">
+        <mat-icon aria-hidden="false" style="margin-right: 10px">cloud_download</mat-icon>
+        <span> Скачать локальное тестирование </span>
+    </button>
+
+</div>
+<div class="category-list">
+    <app-category-card *ngFor="let category of categories" [data]="category"
+        class="category-card"
+        (delete)="categoryDelete(category)"
+        (edit)="categoryEdit(category)"
+    ></app-category-card>
+</div>

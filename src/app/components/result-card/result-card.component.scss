@@ -1,0 +1,80 @@
+.card {
+    max-width: 700px;
+    min-width: 700px;
+    border-left: solid 7px transparent;
+
+    &__unknown {
+        border-left-color: var(--color-primary);
+    }
+
+    &__true {
+        border-left-color: green;
+    }
+
+    &__false {
+        border-left-color: red;
+    }
+
+    &__near {
+        border-left-color: orange;
+    }
+}
+
+.content-disabler {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+}
+
+.active-answer {
+    font-weight: 500 !important;
+}
+
+ul {
+    list-style-type: none;
+    padding-inline-start: 20px;
+
+    & > li {
+        margin-top: 5px;
+    }
+}
+
+::ng-deep .mat-checkbox-layout {
+    white-space: normal !important;
+}
+    
+::ng-deep .mat-radio-label {
+    white-space: normal !important;
+}
+
+mat-card-header {
+    display: flex;
+    margin-bottom: 10px;
+
+    ::ng-deep .mat-card-header-text {
+        margin: 0 0 0 0;
+    }
+
+    ::ng-deep .mat-card-title {
+        margin-top: 13px;
+    }
+}
+
+mat-button-toggle-group {
+    z-index: 9999;
+}
+
+mat-card-content {
+    margin-top: 20px;
+}
+
+mat-radio-button {
+    margin-bottom: 10px;
+}
+
+.fill-remaining-space {
+    flex-grow: 1;
+}

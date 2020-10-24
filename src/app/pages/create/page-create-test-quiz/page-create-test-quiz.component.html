@@ -1,0 +1,73 @@
+<app-loader *ngIf="loader$ | async"></app-loader>
+<div style="margin-top: 10px;">
+    <button (click)="buttonBackToListScreen()" mat-button>
+        <mat-icon matPrefix style="margin-right: 10px">arrow_back</mat-icon>
+        <span>Вернуться к списку тестирований</span>
+    </button>
+</div>
+<mat-spinner style="margin: auto" *ngIf="!data"></mat-spinner>
+<ng-container *ngIf="data">
+    <div style="margin: 20px;">
+        <mat-form-field style="font-size: larger; width: 70%">
+            <mat-label>Название тестирования</mat-label>
+            <input
+                [value]="data.title"
+                (input)="data.title = $event.target.value"
+                (blur)="blurQuestionTitle(data.title)"
+                matInput placeholder="Новое тестирование">
+            <mat-icon matSuffix>edit</mat-icon>
+        </mat-form-field>
+        <h4 style="margin-top: 20px">Выберите тип тестирования:</h4>
+        <mat-radio-group [(ngModel)]="data.type" (change)="changeType()">
+            <mat-radio-button color="accent" style="margin-right: 30px" [value]="1">Обычное тестирование</mat-radio-button>
+            <mat-radio-button color="accent" style="margin-right: 30px" [value]="2">Панорамы</mat-radio-button>
+            <mat-radio-button color="accent" style="margin-right: 30px" [value]="3">Виртуальная реальность</mat-radio-button>
+        </mat-radio-group>
+        <br><br>
+        <h4 style="margin-top: 20px">Настройки тестирования:</h4>
+        <mat-slide-toggle (change)="buttonShuffle($event)" [checked]="data.isShuffleQuestions" color="accent">Перемешать вопросы</mat-slide-toggle>
+        <mat-form-field style="margin-left: 40px; line-height: 1;">
+            <mat-label>Время тестирования, с</mat-label>
+            <input
+                type="number"
+                [value]="data.time"
+                (input)="data.time = $event.target.value"
+                (blur)="blurQuestionTime(data.time)"
+                autocomplete="off"
+                matInput placeholder="1800">
+            <mat-icon matSuffix>timer</mat-icon>
+        </mat-form-field>
+        <mat-form-field style="margin-left: 40px; line-height: 1;">
+            <mat-label>Количество вопросов</mat-label>
+            <input
+                type="number"
+                [value]="data.questionsCount"
+                (input)="data.questionsCount = $event.target.value"
+                (blur)="blurQuestionCount(data.questionsCount)"
+                autocomplete="off"
+                matInput placeholder="20">
+            <mat-icon matSuffix>edit</mat-icon>
+        </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+    <div style="margin: 20px;">
+        <h4>Список заданий:</h4>
+        <div class="card-list">
+            <ng-container *ngFor="let quizCard of data.questions; let idx = index">
+                <app-quiz-card
+                    (click)=cardClick(quizCard.id)
+                    [idx]="idx+1"
+                    [isActive]="quizCard.isActive"
+                    [data]="quizCard"
+                    [quizType]="data.type"
+                    (deleteCard)="deleteCard($event)"
+                >
+                </app-quiz-card>
+            </ng-container>
+            <button (click)="buttonAddQuestion()" mat-button>
+                <mat-icon>add</mat-icon>
+                <span> Добавить вопрос</span>
+            </button>
+        </div>
+    </div>
+</ng-container>

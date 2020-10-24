@@ -1,0 +1,40 @@
+<div class="vertical-group">
+    <mat-toolbar color="primary"  class="group group_header">
+<!--        <img style="height: 70%; margin: -10px 20px 0 0;" src="assets/icons/gpn-logo.png">-->
+        <img alt="" style="height: 20%; margin: 0 20px 0 0;" src="assets/icons/slavneft-logo.svg">
+        <span style="font-size: 15px;">Панель администратора</span>
+        <span class="fill-remaining-space"></span>
+        <a (click)="pageTypeNum = 1" class="group_header__tab">Результаты</a>
+        <a (click)="pageTypeNum = 2" class="group_header__tab">Управление</a>
+        <button matTooltip="Изменить цветовую схему" mat-icon-button (click)="changeTheme()">
+            <mat-icon>brightness_4</mat-icon>
+        </button>
+
+    </mat-toolbar>
+
+    <main class="group group_body mat-drawer-container">
+        <ng-container [ngSwitch]="pageTypeNum">
+            <ng-template ngSwitchCase="2">
+                <mat-tab-group color="accent" style="height: 100%">
+                    <mat-tab label="Категории">
+                        <app-page-create-category></app-page-create-category>
+                    </mat-tab>
+                    <mat-tab label="Группы вопросов">
+                        <app-page-create-set></app-page-create-set>
+                    </mat-tab>
+                    <mat-tab label="Тесты">
+                        <app-page-create-test></app-page-create-test>
+                    </mat-tab>
+                </mat-tab-group>
+            </ng-template>
+
+            <ng-template ngSwitchCase="1">
+                <mat-tab-group color="accent" style="height: 100%">
+                    <mat-tab label="Результаты">
+                        <app-page-info-report></app-page-info-report>
+                    </mat-tab>
+                </mat-tab-group>
+            </ng-template>
+        </ng-container>
+    </main>
+</div>

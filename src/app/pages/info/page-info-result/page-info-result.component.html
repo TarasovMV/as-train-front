@@ -1,0 +1,61 @@
+<div style="margin-top: 10px;">
+    <button (click)="backToTable()" mat-button>
+        <mat-icon matPrefix style="margin-right: 10px">arrow_back</mat-icon>
+        <span>Вернуться к таблице результатов</span>
+    </button>
+</div>
+
+<div class="container">
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+            <mat-panel-title>
+                Основная информация
+            </mat-panel-title>
+            <mat-panel-description>
+                Информация о пользователе и статистика этапов
+            </mat-panel-description>
+            </mat-expansion-panel-header>
+            <section>
+                <span>Участник: {{dataSource?.user?.lastName}} {{dataSource?.user?.firstName}} {{dataSource?.user?.middleName}}</span>
+                <br>
+                <ng-container *ngFor="let testing of dataSource?.testingsObj; let idx = index;">
+                    <span>{{idx + 1}} Этап - набрано {{getScoreByTesting(testing.id)}} балл(ов) за {{testing.resultTime}} секунд(ы)</span>
+                    <br> 
+                </ng-container>
+            </section>
+        </mat-expansion-panel>
+        <ng-container *ngFor="let el of dataSource?.testingsObj; let idx = index;">
+            <ng-container *ngTemplateOutlet="testingPanel; context: {idx: idx + 1, testing: el}"></ng-container>
+        </ng-container>
+    </mat-accordion>
+</div>
+
+<ng-template #testingPanel let-idx="idx" let-testing="testing">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{idx}} Этап
+        </mat-panel-title>
+        <mat-panel-description>
+            {{testing.title}}
+        </mat-panel-description>
+        </mat-expansion-panel-header>
+        <section class="result-card">
+            <ng-container *ngFor="let question of testing.questions; let idx=index">
+                <app-result-card 
+                    [idx]="idx + 1"
+                    [quizType]="testing.type"
+                    [questionType]="getQuestionType(question.id)"
+                    [dataSource]="question"
+                    [score]="getQuestionScore(question.id)"
+                    (changeQuestionType)="setQuestionType($event)">
+                </app-result-card>
+            </ng-container>
+        </section>
+    </mat-expansion-panel>
+</ng-template>
+
+<ng-template #userInfo>
+    <span></span>
+</ng-template>

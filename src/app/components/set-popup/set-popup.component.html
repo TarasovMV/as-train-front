@@ -1,0 +1,24 @@
+<main>
+  <h4>Заполните поля для {{ data.isNew ? 'создания' : 'редактирования'}} сета тестирования</h4>
+
+  <mat-form-field appearance="standard" style="width: 100%">
+      <mat-label>Название сета</mat-label>
+      <input autocomplete="off" required [formControl]="data.set.titleForm" matInput placeholder="Оператор АСУ ТП">
+  </mat-form-field>
+
+  <ng-container *ngFor="let stage of data.set.stages; let idx = index;">
+    <mat-form-field style="width: 100%">
+      <mat-label>{{ stage.title }}</mat-label>
+      <mat-select [required]="idx < 2" [formControl]="stage.form">
+        <mat-option *ngFor="let testing of testingsReference" [value]="testing.id">
+          {{testing.title}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ng-container>
+
+  <div mat-dialog-actions>
+      <button mat-button (click)="onCancelClick()">Отмена</button>
+      <button (click)="onAcceptClick()" mat-button cdkFocusInitial>Сохранить</button>
+  </div>
+</main>
