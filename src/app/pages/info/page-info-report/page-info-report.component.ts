@@ -3,6 +3,8 @@ import { QuizService } from '../../../services/quiz.service';
 import { BehaviorSubject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Sort } from '@angular/material/sort';
+import {MatDialog} from '@angular/material/dialog';
+import {HelperPopupComponent} from '../../../components/helper-popup/helper-popup.component';
 
 interface ICompetitionResultReport extends ICompetitionResult {
     stagesScore?: (number | null)[];
@@ -37,7 +39,7 @@ export class PageInfoReportComponent implements OnInit {
 
     public currentResult: number = 0;
 
-    constructor(private quizService: QuizService) { }
+    constructor(private quizService: QuizService, private dialog: MatDialog) { }
 
     public get filterDataSource(): ICompetitionResultReport[] {
         if (!this.currentFilterId) {
@@ -119,8 +121,17 @@ export class PageInfoReportComponent implements OnInit {
 
     public async deleteResult(event: any, el: ICompetitionResultReport): Promise<void> {
         event.stopPropagation();
-        await this.quizService.deleteResultById(el.id);
-        await this.getDataset();
+        const dialogRef = this.dialog.open(HelperPopupComponent, {
+            width: '350px',
+            data: 'Вы уверены, что хотите удалить результат?',
+        });
+
+        dialogRef.afterClosed().subscribe(async result => {
+            if (result) {
+                await this.quizService.deleteResultById(el.id);
+                await this.getDataset();
+            }
+        });
     }
 
     public async reportResult(event: any, el: ICompetitionResultReport): Promise<void> {

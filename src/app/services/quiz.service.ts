@@ -111,7 +111,7 @@ export class QuizService {
 
     public async setQuestionResult(id: number, score: number | null): Promise<boolean> {
         try {
-            await await this.http.post(`${this.restUrl}/api/testing/score/${id}`, {d: score}).toPromise();
+            await this.http.post(`${this.restUrl}/api/testing/score/${id}`, {d: score}).toPromise();
             return true;
         } catch {
             return false;

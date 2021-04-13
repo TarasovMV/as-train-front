@@ -26,6 +26,7 @@ import { PageInfoReportComponent } from './pages/info/page-info-report/page-info
 import { PageInfoResultComponent } from './pages/info/page-info-result/page-info-result.component';
 import { ResultCardComponent } from './components/result-card/result-card.component';
 import { FreeCheckPopupComponent } from './components/free-check-popup/free-check-popup.component';
+import { HelperPopupComponent } from './components/helper-popup/helper-popup.component';
 
 @NgModule({
     declarations: [
@@ -48,6 +49,7 @@ import { FreeCheckPopupComponent } from './components/free-check-popup/free-chec
         PageInfoResultComponent,
         ResultCardComponent,
         FreeCheckPopupComponent,
+        HelperPopupComponent,
     ],
     imports: [
         HttpClientModule,
