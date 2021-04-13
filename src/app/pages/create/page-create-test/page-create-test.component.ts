@@ -47,6 +47,11 @@ export class PageCreateTestComponent extends SubscriptionRxJs implements OnInit,
         );
     }
 
+    async copyFromQuiz(id: number): Promise<void> {
+        await this.quizService.copyTesting(id);
+        await this.fillTestingList();
+    }
+
     async fillTestingList(): Promise<void> {
         const list = await this.quizService.getAllTestings();
         this.quizService.listQuiz$.next(list);

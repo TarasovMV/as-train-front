@@ -11,6 +11,7 @@ export class TestCardComponent implements OnInit {
 
     @Output() delete = new EventEmitter();
     @Output() edit = new EventEmitter();
+    @Output() coping = new EventEmitter();
 
     constructor() { }
 
@@ -23,6 +24,10 @@ export class TestCardComponent implements OnInit {
 
     public onEdit(): void {
         this.edit.emit();
+    }
+
+    public onCopy(): void {
+        this.coping.emit();
     }
 
     public getTypeById(id: number): string {

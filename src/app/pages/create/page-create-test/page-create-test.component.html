@@ -10,7 +10,7 @@
         </div>
         <div class="test-list">
             <ng-container *ngFor="let quiz of listQuiz">
-                <app-test-card [data]="quiz" (delete)="openDialogDelete(quiz.id)" (edit)="testEdit(quiz.id)" class="test-card"></app-test-card>
+                <app-test-card [data]="quiz" (delete)="openDialogDelete(quiz.id)" (edit)="testEdit(quiz.id)" (coping)="copyFromQuiz(quiz.id)" class="test-card"></app-test-card>
             </ng-container>
         </div>
     </ng-container>

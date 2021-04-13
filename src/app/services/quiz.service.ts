@@ -78,6 +78,10 @@ export class QuizService {
         this.restUrl = appConfigService.restUrl;
     }
 
+    public async copyTesting(id: number): Promise<void> {
+        await this.http.post(`${this.restUrl}/api/testing/testing/copy/${id}`, {}).toPromise();
+    }
+
     public async loadUserReport(id: number): Promise<void> {
         this.downloadFile(`${this.restUrl}/api/report/${id}`);
     }
