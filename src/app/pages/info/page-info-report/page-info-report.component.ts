@@ -66,7 +66,7 @@ export class PageInfoReportComponent implements OnInit {
             const compResult = this.dataSource.find(el => el.id === id);
             result = compResult.stagesScore.some(el => el === null)  ? null : compResult.stagesScore.reduce((a, b) => a + b);
         }
-        return (result !== null) ? Math.round(result * 100) / 100 : '-';
+        return (result !== null && !isNaN(result)) ? Math.round(result * 100) / 100 : '-';
     }
 
     public async getReport(): Promise<void> {

@@ -6,6 +6,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, Validators, AbstractControl } from '@angular/forms';
 import { fillDataShape } from 'src/app/functions/FillDataShape';
 
+const REQUIRED_STAGES = 1;
+
 @Component({
   selector: 'app-set-popup',
   templateUrl: './set-popup.component.html',
@@ -14,6 +16,7 @@ import { fillDataShape } from 'src/app/functions/FillDataShape';
 export class SetPopupComponent implements OnInit {
 
     public testingsReference: ITesting[] = [];
+    public readonly requiredStages = REQUIRED_STAGES;
 
     constructor(
         public quizService: QuizService,
@@ -55,7 +58,7 @@ export class SetPopupComponent implements OnInit {
     createFormControl(): void {
         this.data.set.titleForm = new FormControl(this.data.set.title, [Validators.required]);
         this.data.set.stages.forEach((s, idx) => {
-            if (idx >= 2) {
+            if (idx >= REQUIRED_STAGES) {
                 s.form = new FormControl(s.testingId, Validators.nullValidator);
                 return;
             }
