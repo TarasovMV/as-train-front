@@ -1,0 +1,68 @@
+<table mat-table [dataSource]="dataSource$ | async" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let participant"> {{participant.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="code">
+        <th mat-header-cell *matHeaderCellDef> Код </th>
+        <td mat-cell *matCellDef="let participant"> {{participant.code}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="company">
+        <th mat-header-cell *matHeaderCellDef> Компания </th>
+        <td mat-cell *matCellDef="let participant"> {{participant.company}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef> Фамилия </th>
+        <td mat-cell *matCellDef="let participant"> {{participant.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef> Имя </th>
+        <td mat-cell *matCellDef="let participant"> {{participant.firstName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="middleName">
+        <th mat-header-cell *matHeaderCellDef> Отчество </th>
+        <td mat-cell *matCellDef="let participant"> {{participant.middleName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="timestamp">
+        <th mat-header-cell *matHeaderCellDef> Время завершения </th>
+        <td mat-cell *matCellDef="let participant"> {{(participant.result?.timestamp | date:'dd.MM.yyyy HH:mm') || '-'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="stage1">
+        <th mat-header-cell *matHeaderCellDef> 1 этап, % </th>
+        <td mat-cell *matCellDef="let participant"> {{participant.result?.firstScore | additionalResult}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="stage2">
+        <th mat-header-cell *matHeaderCellDef> 2 этап, % </th>
+        <td mat-cell *matCellDef="let participant"> {{participant.result?.secondScore | additionalResult}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="scoreResult">
+        <th mat-header-cell *matHeaderCellDef> Итого, % </th>
+        <td mat-cell *matCellDef="let participant"> {{participant.result?.allScore | additionalResult}} </td>
+    </ng-container>
+
+<!--    <ng-container matColumnDef="timeResult">-->
+<!--        <th mat-header-cell mat-sort-header *matHeaderCellDef> Время, c </th>-->
+<!--        <td mat-cell *matCellDef="let element"> {{getResultTime(element.id)}} </td>-->
+<!--    </ng-container>-->
+
+    <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+            <mat-icon style="cursor: pointer" (click)="deleteResult($event, element)" matTooltip="Удалить результат">delete_sweep</mat-icon>
+            <mat-icon style="cursor: pointer" (click)="addResult($event, element)" matTooltip="Добавить результат">add</mat-icon>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+</table>

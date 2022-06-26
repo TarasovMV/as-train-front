@@ -1,0 +1,28 @@
+<main [formGroup]="form">
+    <h4> Заполните поля для создания участника </h4>
+
+    <mat-form-field appearance="standard" style="width: 100%">
+        <mat-label> Компания </mat-label>
+        <input formControlName="company" type="text" autocomplete="off" required matInput placeholder="ПАО Газпром нефть">
+    </mat-form-field>
+
+    <mat-form-field appearance="standard" style="width: 100%">
+        <mat-label> Фамилия </mat-label>
+        <input formControlName="lastName" type="text" autocomplete="off" required matInput placeholder="Иванов">
+    </mat-form-field>
+
+    <mat-form-field appearance="standard" style="width: 100%">
+        <mat-label> Имя </mat-label>
+        <input formControlName="firstName" type="text" autocomplete="off" required matInput placeholder="Иван">
+    </mat-form-field>
+
+    <mat-form-field appearance="standard" style="width: 100%">
+        <mat-label> Отчество </mat-label>
+        <input formControlName="middleName" type="text" autocomplete="off" matInput placeholder="Иванович">
+    </mat-form-field>
+
+    <div mat-dialog-actions>
+        <button mat-button (click)="cancel()">Отмена</button>
+        <button (click)="accept()" mat-button cdkFocusInitial>Сохранить</button>
+    </div>
+</main>

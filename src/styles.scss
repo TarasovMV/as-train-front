@@ -70,11 +70,9 @@ $slavneft-primary: (
     )
 );
 
-$testing-admin-primary: mat-palette($slavneft-primary);
-// $testing-admin-primary: mat-palette($slavneft-primary);
+$testing-admin-primary: mat-palette($gpn-primary);
 
-$testing-admin-accent: mat-palette($slavneft-primary);
-// $testing-admin-accent: mat-palette($slavneft-primary);
+$testing-admin-accent: mat-palette($gpn-primary);
 // $testing-admin-accent: mat-palette($mat-pink, A200, A100, A400);
 
 

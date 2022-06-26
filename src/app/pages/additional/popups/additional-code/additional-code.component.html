@@ -1,0 +1,13 @@
+<main [formGroup]="form">
+    <h4> Участник: {{ participant }} </h4>
+
+    <mat-form-field appearance="standard" style="width: 100%">
+        <mat-label> Введите результат в виде кода </mat-label>
+        <input formControlName="code" type="text" autocomplete="off" required matInput placeholder="390">
+    </mat-form-field>
+
+    <div mat-dialog-actions>
+        <button mat-button (click)="cancel()">Отмена</button>
+        <button (click)="accept()" mat-button cdkFocusInitial>Сохранить</button>
+    </div>
+</main>

@@ -1,10 +1,9 @@
 import { AppConfigService } from './app-config.service';
-import { IUserCategory, IFileModel } from './../models/User.model';
-import { CategoryCardComponent } from './../components/category-card/category-card.component';
-import { ITestingSet, ICompetitionResult } from './../models/Testing.model';
+import { IUserCategory, IFileModel } from '../models/User.model';
+import { ITestingSet, ICompetitionResult } from '../models/Testing.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ITestingQuestion, ITesting, ITestingAnswer } from '../models/Testing.model';
 import { saveAs } from 'file-saver';
@@ -73,8 +72,6 @@ export class QuizService {
         private http: HttpClient,
         private appConfigService: AppConfigService,
     ) {
-        // this.restUrl = 'http://localhost:5000';
-        // this.restUrl = 'http://192.168.1.11:11001';
         this.restUrl = appConfigService.restUrl;
     }
 
@@ -578,7 +575,9 @@ export class QuizService {
         }
     }
 
-    // this.downloadFile(`${this.restUrl}/api/report/2`).subscribe(ref => console.log(ref));
+    /**
+     * @deprecated use service instead
+     */
     private downloadFile(url: string): void {
         this.http.get<any>(url, { responseType: 'blob' as 'json', observe: 'response' }).pipe(
                 map((result: HttpResponse<Blob>) => {

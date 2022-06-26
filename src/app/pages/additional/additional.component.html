@@ -1,0 +1,18 @@
+<div class="vertical-group">
+    <mat-toolbar color="primary" class="group group_header">
+        <img style="height: 70%; margin: -10px 20px 0 0;" src="assets/icons/gpn-logo.png">
+        <span style="font-size: 15px;">Панель администратора</span>
+        <span class="fill-remaining-space"></span>
+        <button matTooltip="Изменить цветовую схему" mat-icon-button (click)="changeTheme()">
+            <mat-icon>brightness_4</mat-icon>
+        </button>
+
+    </mat-toolbar>
+
+    <main class="group group_body mat-drawer-container">
+        <div class="container">
+            <app-additional-controls></app-additional-controls>
+            <app-additional-table style="flex-grow: 1; overflow: scroll"></app-additional-table>
+        </div>
+    </main>
+</div>
