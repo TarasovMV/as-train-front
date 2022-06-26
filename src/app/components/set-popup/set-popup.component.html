@@ -9,7 +9,7 @@
   <ng-container *ngFor="let stage of data.set.stages; let idx = index;">
     <mat-form-field style="width: 100%">
       <mat-label>{{ stage.title }}</mat-label>
-      <mat-select [required]="idx < 2" [formControl]="stage.form">
+      <mat-select [required]="idx < requiredStages" [formControl]="stage.form">
         <mat-option *ngFor="let testing of testingsReference" [value]="testing.id">
           {{testing.title}}
         </mat-option>
